@@ -3,8 +3,8 @@ MAINTAINER libra@ljing.wang
 ENV TZ=Asia/Shanghai
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
-ARG user=libra
-ARG group=libra
+ARG user=server
+ARG group=server
 ARG uid=1000
 ARG gid=1000
 ARG ARG_HOME=/usr/share/work
@@ -37,5 +37,3 @@ RUN groupadd -g ${gid} ${group} \
     && useradd -d "$HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 WORKDIR ${ARG_HOME}
-
-USER ${user}
