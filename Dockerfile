@@ -25,3 +25,5 @@ RUN groupadd -g ${gid} ${group} \
     && useradd -d "$HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 WORKDIR ${ARG_HOME}
+
+USER ${user}
