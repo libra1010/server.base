@@ -9,7 +9,7 @@ ARG uid=1000
 ARG gid=1000
 ARG ARG_HOME=/usr/share/work
 ENV HOME ${ARG_HOME}
-ENV PATH /usr/share/work:$PATH
+
 
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
     echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib" >/etc/apt/sources.list && \
@@ -25,6 +25,9 @@ RUN  arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
 && wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$arch" \
 && chmod +x /usr/local/bin/gosu \
 && gosu nobody true
+
+
+ENV PATH /usr/share/work:/usr/local/bin:/usr/local/bin/gosu:$PATH
 
 RUN apt-get update && apt-get install net-tools
 RUN apt-get update && apt-get install vim -y
