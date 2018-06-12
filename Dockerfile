@@ -17,6 +17,14 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
     echo "deb-src http://mirrors.163.com/debian/ jessie main non-free contrib" >>/etc/apt/sources.list && \
     echo "deb-src http://mirrors.163.com/debian/ jessie-proposed-updates main non-free contrib" >>/etc/apt/sources.list
 
+ENV GOSU_VERSION 1.10
+
+
+RUN GOSU_SHA=5ec5d23079e94aea5f7ed92ee8a1a34bbf64c2d4053dadf383992908a2f9dc8a \
+  && curl -sSL -o /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
+  && chmod +x /usr/local/bin/gosu \
+  && echo "$GOSU_SHA  /usr/local/bin/gosu" | sha256sum -c - 
+
 RUN apt-get update && apt-get install net-tools
 RUN apt-get update && apt-get install vim -y
 RUN apt-get update && apt-get install telnet
