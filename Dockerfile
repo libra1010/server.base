@@ -22,8 +22,9 @@ ENV GOSU_VERSION 1.10
 
 
 RUN  arch="$(dpkg --print-architecture | awk -F- '{ print $NF }')" \
-&& wget -O gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$arch" \
-&& chmod +x gosu
+&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$arch" \
+&& chmod +x /usr/local/bin/gosu \
+&& gosu nobody true
 
 RUN apt-get update && apt-get install net-tools
 RUN apt-get update && apt-get install vim -y
