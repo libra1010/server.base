@@ -19,6 +19,7 @@ RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak && \
 
 RUN apt-get update && apt-get install net-tools
 RUN apt-get update && apt-get install vim -y
+RUN apt-get update && apt-get install telnet
 
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
